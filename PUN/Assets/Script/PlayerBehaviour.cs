@@ -2,23 +2,38 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Move")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float sprintMultiplier = 1.7f;
     [SerializeField] private float mouseSensitivity = 2f;
     [SerializeField] private float maxVerticalRotation = 80f; // Limite de rotation verticale
 
+    [Header("FOV Settings")]
+    [SerializeField] private float defaultFOV = 65f;
+    [SerializeField] private float sprintFOV = 90f;
+    [SerializeField] private float FOVTransitionSpeed = 10f;
+
+    private Camera playerCamera;
     private Rigidbody rb;
     private Transform playerRotation; // L'objet qui va pivoter verticalement
     private float verticalRotation = 0f;
     public bool isSprinting;
 
+    private float targetFOV;
+    private float currentFOV;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         playerRotation = transform.GetChild(0); // Le GameObject PlayerRotation
+        playerCamera = GetComponentInChildren<Camera>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        currentFOV = defaultFOV;
+        targetFOV = defaultFOV;
+        playerCamera.fieldOfView = defaultFOV;
     }
 
     private void Update()
@@ -34,6 +49,13 @@ public class PlayerMovement : MonoBehaviour
 
         // Gestion du sprint
         isSprinting = Input.GetKey(KeyCode.LeftShift);
+
+        targetFOV = isSprinting ? sprintFOV : defaultFOV;
+
+        // Transition fluide du FOV
+        currentFOV = Mathf.Lerp(currentFOV, targetFOV, FOVTransitionSpeed * Time.deltaTime);
+        playerCamera.fieldOfView = currentFOV;
+
     }
 
     private void FixedUpdate()
