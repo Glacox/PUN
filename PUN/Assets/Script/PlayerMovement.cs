@@ -17,11 +17,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("FOV Settings")]
     [SerializeField] private float defaultFOV = 65f;
     [SerializeField] private float sprintFOV = 100;
+    [SerializeField] private float ScopeFOV = 50f;
     [SerializeField] private float FOVTransitionSpeed = 10f;
 
     private Camera playerCamera;
     private Rigidbody rb;
-    private Transform playerRotation; // Partie qui tourne verticalement (ex. tête)
     private float verticalRotation = 0f;
     public bool isSprinting;
 
@@ -31,10 +31,6 @@ public class PlayerMovement : MonoBehaviour
     // Références à l'Animator d'un autre objet
     [SerializeField] private Animator targetAnimator;  // L'Animator de l'objet à contrôler (ex: un modèle ou un autre objet)
 
-    // Tête du joueur
-    [SerializeField] private Transform headTransform; // Transform de la tête du personnage à suivre par la caméra
-    [SerializeField] private float headFollowSpeed = 10f; // Vitesse à laquelle la tête suit la caméra
-
     // Distance minimale entre la caméra et le joueur pour éviter les collisions
     [SerializeField] private float minCameraDistance = 0.5f;
     [SerializeField] private float maxCameraDistance = 2f; // La distance maximale que la caméra peut atteindre du joueur
@@ -42,8 +38,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        playerRotation = transform.GetChild(0); // La partie qui fait tourner la tête (ou l'objet Parent)
-        playerCamera = GetComponentInChildren<Camera>(); // La caméra attachée à la tête
+        playerCamera = GetComponentInChildren<Camera>(); // La caméra attachée au joueur
 
         currentFOV = defaultFOV;
         targetFOV = defaultFOV;
@@ -62,44 +57,33 @@ public class PlayerMovement : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         transform.Rotate(Vector3.up * mouseX);
 
-        // Rotation verticale pour la tête (affecte la tête et la caméra)
+        // Rotation verticale pour la caméra
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
         verticalRotation -= mouseY;
         verticalRotation = Mathf.Clamp(verticalRotation, -maxVerticalRotation, maxVerticalRotation);
 
-        // Rotation de la tête indépendamment des animations
-        if (headTransform != null)
-        {
-            headTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f); // Rotation de la tête
-        }
-
-        // La caméra suit la tête, mais n'est pas influencée par l'animation
-        playerCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f); // Garde la caméra liée à la tête
-
-        // Faire suivre la tête du joueur par la caméra de manière fluide
-        if (headTransform != null)
-        {
-            Vector3 targetHeadPosition = playerCamera.transform.position;
-            headTransform.position = Vector3.Lerp(headTransform.position, targetHeadPosition, headFollowSpeed * Time.deltaTime);
-        }
+        // Appliquer la rotation verticale à la caméra
+        playerCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
 
         // Gestion du sprint
         isSprinting = Input.GetKey(KeyCode.LeftShift);
-        targetFOV = isSprinting ? sprintFOV : defaultFOV;
+        float baseFOV = isSprinting ? sprintFOV : defaultFOV; // Choisir le FOV en fonction du sprint
+
+        // Vérifier le clic droit pour activer le "scope"
+        if (Input.GetMouseButton(1)) // Maintenir le clic droit pour zoomer
+        {
+            targetAnimator.SetBool("Scope", true); // Active le scope
+            targetFOV = ScopeFOV; // Réduit le FOV pour le scope
+        }
+        else // Relâchement du clic droit
+        {
+            targetAnimator.SetBool("Scope", false); // Désactive le scope
+            targetFOV = baseFOV; // Rétablit le FOV par défaut ou de sprint
+        }
 
         // Transition fluide du FOV
         currentFOV = Mathf.Lerp(currentFOV, targetFOV, FOVTransitionSpeed * Time.deltaTime);
         playerCamera.fieldOfView = currentFOV;
-
-        // Gérer le clic droit de la souris pour activer/désactiver le "Scope"
-        if (Input.GetMouseButtonDown(1)) // Clic droit
-        {
-            targetAnimator.SetBool("Scope", true); // Active le scope
-        }
-        else if (Input.GetMouseButtonUp(1)) // Relâchement du clic droit
-        {
-            targetAnimator.SetBool("Scope", false); // Désactive le scope
-        }
 
         // Saut
         if (isGrounded && Input.GetButtonDown("Jump"))
@@ -178,6 +162,9 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = false;
         }
+
+        // Met à jour le paramètre 'isGrounded' dans l'Animator
+        targetAnimator.SetBool("isGrounded", isGrounded);
 
         // Ray de debug pour visualiser le ground check
         Debug.DrawRay(transform.position, Vector3.down * groundCheckDistance, isGrounded ? Color.green : Color.red);

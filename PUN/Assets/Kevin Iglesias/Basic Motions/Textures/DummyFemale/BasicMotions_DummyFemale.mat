@@ -83,9 +83,9 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
-    - _MetallicTransparency: 0.666
+    - _MetallicTransparency: 1
     - _Mode: 0
-    - _NormalIntensity: -1
+    - _NormalIntensity: 1
     - _OcclusionIntensity: 0.666
     - _OcclusionStrength: 0.75
     - _OutlineWidth: 0.015
