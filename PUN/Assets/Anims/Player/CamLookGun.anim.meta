@@ -1,6 +1,12 @@
 fileFormatVersion: 2
-guid: 0571befa971529d459c55143d1c5864f
+<<<<<<<< HEAD:PUN/Assets/Anims/Player/CamLookGun.anim.meta
+guid: 5846a472f5c03d1428434878d58e22b2
 NativeFormatImporter:
+========
+guid: 377e069508c06434daf89d259b9617e1
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> Mapping-and-music:PUN/Assets/Audio/Musique.meta
   externalObjects: {}
   mainObjectFileID: 7400000
   userData: 

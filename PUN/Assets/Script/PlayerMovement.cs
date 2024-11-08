@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float sprintFOV = 100;
     [SerializeField] private float ScopeFOV = 50f;
     [SerializeField] private float FOVTransitionSpeed = 10f;
+
+    [Header("Other")]
+    [SerializeField] private TMPro.TextMeshProUGUI doorCounterText;
+    public float DoorsCounter = 0;
+
 
     private Camera playerCamera;
     private Rigidbody rb;
@@ -46,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        doorCounterText.text = $"Doors Kicked {DoorsCounter}";
     }
 
     private void Update()
@@ -200,5 +207,16 @@ public class PlayerMovement : MonoBehaviour
             // Si aucune collision n'est détectée, on remet la caméra à la distance maximale
             playerCamera.transform.position = transform.position + directionToCamera.normalized * maxCameraDistance;
         }
+    }
+
+    public void AddDoorCounter(int count)
+    {
+        DoorsCounter += count;
+        UpdateDoorCounterText();
+    }
+
+    private void UpdateDoorCounterText()
+    {
+        doorCounterText.text = $"Doors Kicked {DoorsCounter}";
     }
 }

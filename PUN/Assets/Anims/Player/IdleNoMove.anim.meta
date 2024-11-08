@@ -1,6 +1,12 @@
 fileFormatVersion: 2
-guid: 4089f70a1bea50b4ba36ddacc0b460da
+<<<<<<<< HEAD:PUN/Assets/Anims/Player/IdleNoMove.anim.meta
+guid: 943256cd5f2fe8845b1d0f522a98b4f2
 NativeFormatImporter:
+========
+guid: f54d1bd14bd3ca042bd867b519fee8cc
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> Mapping-and-music:PUN/Assets/TextMesh Pro.meta
   externalObjects: {}
   mainObjectFileID: 7400000
   userData: 
