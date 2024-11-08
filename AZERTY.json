@@ -1,0 +1,116 @@
+{
+    "m_Id": "Default copy",
+    "m_ParentId": "",
+    "m_Entries": [
+        {
+            "identifier": {
+                "path": "3D Viewport/Fly Mode Down"
+            },
+            "combinations": [
+                {
+                    "m_KeyCode": 97,
+                    "m_Modifiers": 0
+                }
+            ]
+        },
+        {
+            "identifier": {
+                "path": "3D Viewport/Fly Mode Forward"
+            },
+            "combinations": [
+                {
+                    "m_KeyCode": 122,
+                    "m_Modifiers": 0
+                }
+            ]
+        },
+        {
+            "identifier": {
+                "path": "3D Viewport/Fly Mode Left"
+            },
+            "combinations": [
+                {
+                    "m_KeyCode": 113,
+                    "m_Modifiers": 0
+                }
+            ]
+        },
+        {
+            "identifier": {
+                "path": "Animation/Frame All"
+            },
+            "combinations": [
+                {
+                    "m_KeyCode": 113,
+                    "m_Modifiers": 0
+                }
+            ]
+        },
+        {
+            "identifier": {
+                "path": "Curve Editor/Frame All"
+            },
+            "combinations": [
+                {
+                    "m_KeyCode": 113,
+                    "m_Modifiers": 0
+                }
+            ]
+        },
+        {
+            "identifier": {
+                "path": "Main Menu/Component/Add..."
+            },
+            "combinations": [
+                {
+                    "m_KeyCode": 113,
+                    "m_Modifiers": 6
+                }
+            ]
+        },
+        {
+            "identifier": {
+                "path": "Main Menu/Edit/Select All"
+            },
+            "combinations": [
+                {
+                    "m_KeyCode": 113,
+                    "m_Modifiers": 2
+                }
+            ]
+        },
+        {
+            "identifier": {
+                "path": "Main Menu/GameObject/Toggle Active State"
+            },
+            "combinations": [
+                {
+                    "m_KeyCode": 113,
+                    "m_Modifiers": 5
+                }
+            ]
+        },
+        {
+            "identifier": {
+                "path": "Tools/Move"
+            },
+            "combinations": [
+                {
+                    "m_KeyCode": 122,
+                    "m_Modifiers": 0
+                }
+            ]
+        },
+        {
+            "identifier": {
+                "path": "Tools/Toggle Pivot Position"
+            },
+            "combinations": [
+                {
+                    "m_KeyCode": 119,
+                    "m_Modifiers": 0
+                }
+            ]
+        }
+    ]
+}
