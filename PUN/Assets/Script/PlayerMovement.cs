@@ -91,6 +91,17 @@ public class PlayerMovement : MonoBehaviour
         currentFOV = Mathf.Lerp(currentFOV, targetFOV, FOVTransitionSpeed * Time.deltaTime);
         playerCamera.fieldOfView = currentFOV;
 
+        // Gérer le clic droit de la souris pour activer/désactiver le "Scope"
+        if (Input.GetMouseButtonDown(1)) // Clic droit
+        {
+            targetAnimator.SetBool("Scope", true); // Active le scope
+        }
+        else if (Input.GetMouseButtonUp(1)) // Relâchement du clic droit
+        {
+            targetAnimator.SetBool("Scope", false); // Désactive le scope
+        }
+
+        // Saut
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             Jump();
@@ -100,7 +111,6 @@ public class PlayerMovement : MonoBehaviour
         HandleCameraCollisions();
 
         Debug.DrawRay(transform.position, Vector3.down * groundCheckDistance, isGrounded ? Color.green : Color.red);
-
     }
 
     private void FixedUpdate()
@@ -181,8 +191,6 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Appliquer une impulsion de saut
         targetAnimator.SetBool("Jump", true); // Déclencher l'animation de saut
     }
-
-    //OK
 
     // Gère la collision de la caméra avec le joueur
     private void HandleCameraCollisions()
