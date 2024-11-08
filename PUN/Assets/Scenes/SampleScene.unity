@@ -5008,7 +5008,6 @@ GameObject:
   - component: {fileID: 2112996952}
   - component: {fileID: 2112996956}
   - component: {fileID: 2112996957}
-  - component: {fileID: 2112996958}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5166,28 +5165,6 @@ MonoBehaviour:
   targetAnimator: {fileID: 3149038337350213909}
   minCameraDistance: 0.5
   maxCameraDistance: 1
---- !u!95 &2112996958
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2112996951}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e931d917a9f4236459862f7eece90160, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &29479141637911731
 Transform:
   m_ObjectHideFlags: 0
@@ -6479,7 +6456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8944194668043241926}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.24187204, y: 0.16014867, z: -0.015598093, w: 0.9568736}
+  m_LocalRotation: {x: -0.24187209, y: 0.16014887, z: -0.0155982, w: 0.9568736}
   m_LocalPosition: {x: -0.000000044703484, y: 0.07409791, z: 0.00000020861626}
   m_LocalScale: {x: 1, y: 0.99999964, z: 0.99999964}
   m_ConstrainProportionsScale: 0
@@ -8417,6 +8394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3559538872086769238}
+  - component: {fileID: 8944194668043241927}
   m_Layer: 0
   m_Name: B-head
   m_TagString: Untagged
@@ -8424,6 +8402,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1818360609 &8944194668043241927
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8944194668043241926}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_RotationAtRest: {x: -27.25078, y: 20.685284, z: -6.933684}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_Active: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 330585546}
+    weight: 1
 --- !u!4 &9030717235024722799
 Transform:
   m_ObjectHideFlags: 0
