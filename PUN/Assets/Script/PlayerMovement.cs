@@ -8,6 +8,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float mouseSensitivity = 2f;
     [SerializeField] private float maxVerticalRotation = 80f; // Limite de rotation verticale
 
+    [Header("Jump Settings")]
+    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float groundCheckDistance = 0.2f;
+    [SerializeField] private LayerMask groundLayer;
+    private bool isGrounded;
+
     [Header("FOV Settings")]
     [SerializeField] private float defaultFOV = 65f;
     [SerializeField] private float sprintFOV = 90f;
@@ -56,6 +62,14 @@ public class PlayerMovement : MonoBehaviour
         currentFOV = Mathf.Lerp(currentFOV, targetFOV, FOVTransitionSpeed * Time.deltaTime);
         playerCamera.fieldOfView = currentFOV;
 
+        CheckGrounded();
+        if (isGrounded && Input.GetButtonDown("Jump"))
+        {
+            Jump();
+        }
+
+        Debug.DrawRay(transform.position, Vector3.down * groundCheckDistance, isGrounded ? Color.green : Color.red);
+
     }
 
     private void FixedUpdate()
@@ -75,5 +89,29 @@ public class PlayerMovement : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    private void CheckGrounded()
+    {
+        RaycastHit hit;
+        // Position de départ légèrement surélevée
+        Vector3 startPos = transform.position + Vector3.up * 0.1f;
+
+        if (Physics.Raycast(startPos, Vector3.down, out hit, groundCheckDistance + 0.1f, groundLayer))
+        {
+            isGrounded = true;
+            Debug.Log($"Grounded on: {hit.collider.gameObject.name}");
+        }
+        else
+        {
+            isGrounded = false;
+        }
+    }
+
+    private void Jump()
+    {
+        // Reset la vélocité Y avant de sauter
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 }
