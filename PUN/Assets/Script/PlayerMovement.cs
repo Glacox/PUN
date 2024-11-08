@@ -182,6 +182,8 @@ public class PlayerMovement : MonoBehaviour
         targetAnimator.SetBool("Jump", true); // Déclencher l'animation de saut
     }
 
+    //OK
+
     // Gère la collision de la caméra avec le joueur
     private void HandleCameraCollisions()
     {
