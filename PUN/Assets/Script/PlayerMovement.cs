@@ -19,12 +19,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float sprintFOV = 100;
     [SerializeField] private float FOVTransitionSpeed = 10f;
 
-    [Header("Jump Settings")]
-    [SerializeField] private float jumpForce = 7f;  // La force du saut
-    [SerializeField] private LayerMask groundLayer; // Le Layer des surfaces solides sur lesquelles le joueur peut sauter
-    [SerializeField] private float groundCheckDistance = 0.2f; // Distance du Raycast pour vérifier si le joueur est au sol
-
-    private bool isGrounded; // Vérifie si le joueur est au sol
     private Camera playerCamera;
     private Rigidbody rb;
     private Transform playerRotation; // Partie qui tourne verticalement (ex. tête)
@@ -97,7 +91,6 @@ public class PlayerMovement : MonoBehaviour
         currentFOV = Mathf.Lerp(currentFOV, targetFOV, FOVTransitionSpeed * Time.deltaTime);
         playerCamera.fieldOfView = currentFOV;
 
-        CheckGrounded();
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             Jump();
@@ -105,7 +98,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Gestion de la distance de la caméra par rapport au joueur pour éviter les collisions
         HandleCameraCollisions();
-    }
 
         Debug.DrawRay(transform.position, Vector3.down * groundCheckDistance, isGrounded ? Color.green : Color.red);
 
