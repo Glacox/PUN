@@ -429,10 +429,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d05270025c4224db4dbd0cf88c0987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityThreshold: 10
+  velocityThreshold: 11
   breakForce: 100
   torqueForce: 1
   normalOpenForce: 1
+  musicSource: {fileID: 7658722524528721418, guid: 4b46c5649932acd499fe3fca6508aedb,
+    type: 3}
+  musicClip: {fileID: 8300000, guid: 27c767fb176f253458f76d405b172644, type: 3}
 --- !u!1 &9055463785930742876
 GameObject:
   m_ObjectHideFlags: 0
